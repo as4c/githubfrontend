@@ -1,55 +1,8 @@
-import React, { useState } from "react";
-import axios from "axios";
-import Pagination from "./Pagination";
-
-function App() {
-  const [username, setUsername] = useState("");
-  const [userData, setUserData] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(
-        `http://localhost:8000/api/user/${username}`
-      );
-      setUserData(response.data);
-    } catch (err) {
-      setError("Invalid GitHub username");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
+import React from 'react'
+const Profile = (userData) => {
   return (
-    <>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white justify-left p-6 rounded-lg "
-      >
-        <input
-          className="bg-gray-500 p-2 rounded-lg"
-          type="text"
-          placeholder="Enter GitHub username"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-        />
-        <button
-          className="bg-blue-500 text-white m-2 p-2 rounded-lg"
-          type="submit"
-        >
-          Submit
-        </button>
-      </form>
-      {isLoading && (
-        <div className="text-center my-4">
-          <p>Loading...</p>
-        </div>
-      )}
-      <div className="bg-white border-gray-500 rounded-lg p-2 shadow shadow-emarald-300">
+    <div>
+      {/* <div className="bg-white border-gray-500 rounded-lg p-2 shadow shadow-emarald-300">
         {error && <div className="text-red-500">{error}</div>}
         {userData && (
           <div>
@@ -112,11 +65,11 @@ function App() {
               </div>
             </div>
             <Pagination userData={userData} />
-          </div>
+          </div> 
         )}
-      </div>
-    </>
-  );
+      </div>*/}
+    </div>
+  )
 }
 
-export default App;
+export default Profile
