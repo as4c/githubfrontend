@@ -14,7 +14,7 @@ function App() {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/user/${username}`
+        `https://django-github-api-backend-production.up.railway.app/api/user/${username}`
       );
       setUserData(response.data);
     } catch (err) {
