@@ -1,4 +1,8 @@
 # Getting Started with Create React App
+## Screenshots
+After running the server it will look like that-
+![App Screenshot](https://github.com/as4c/githubfrontend/blob/master/Screenshot%2016-01-2023%2017_47_37.png)
+![App Screenshot](https://github.com/as4c/githubfrontend/blob/master/Screenshot%2016-01-2023%2017_48_07.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
