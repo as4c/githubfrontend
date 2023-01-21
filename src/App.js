@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from "axios";
 import Pagination from "./Pagination";
+
+// import Repositories from "./Repositories";
+// import Profile from "./Profile";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -14,7 +18,7 @@ function App() {
     setError(null);
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/user/${username}`
+        `https://django-github-api-backend-production.up.railway.app/api/user/${username}`
       );
       setUserData(response.data);
     } catch (err) {
@@ -23,6 +27,14 @@ function App() {
       setIsLoading(false);
     }
   };
+
+  // const handlePageChange = (type) => {
+  //   if (type === "prev") {
+  //     setCurrentPage(currentPage - 1);
+  //   } else if (type === "next") {
+  //     setCurrentPage(currentPage + 1);
+  //   }
+  // };
 
   return (
     <>
@@ -49,64 +61,68 @@ function App() {
           <p>Loading...</p>
         </div>
       )}
-      <div className="bg-white border-gray-500 rounded-lg p-2 shadow shadow-emarald-300">
+      <div className="overflow-hidden bg-white border-gray-500 rounded-lg p-2 shadow shadow-emarald-300 ">
         {error && <div className="text-red-500">{error}</div>}
         {userData && (
-          <div>
-            <div className="flex items-center m-2 p-5 shadow shadow-emerald-500">
-              <div className="flex-justify-left">
-                <img
-                  className=" w-32 h-32 rounded-full mr-4 "
-                  src={userData.avatar_url}
-                  alt={userData.name}
-                />
-                <div>
-                  <a
-                    href={userData.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {userData.html_url}
-                  </a>
-                </div>
-              </div>
-              <div className="justify-right m-5">
-                <h2 className="text-xl font-medium block">
-                  <strong>{userData.name}</strong>
-                </h2>
-                <p className="text-blue-700">
-                  <i src="../public/location.png" className="w-2 h-2"></i>
-                  {userData.location}
-                </p>
-                <p className="text-gray-700">{userData.bio}</p>
-                <div className=" mb-4">
+          <div className="flex flex-wrap">
+            <div className="m-2 p-5 shadow shadow-emerald-500">
+              <div className="flex gap-5 flex-col md:flex-row">
+                <div className="flex-wrap md:flex-justify-center px-2">
+                  <img
+                    className="w-20 h-20 md:w-32 md:h-32 rounded-full md:mr-4"
+                    src={userData.avatar_url}
+                    alt={userData.name}
+                  />
                   <div>
-                    {userData.twitter_username && (
-                      <a
-                        className=""
-                        href={userData.twitter_username}
-                        rel="noopener noreferrer"
-                      >
-                        Twitter :
-                      </a>
-                    )}
-                    {userData.email && <p>{userData.email}</p>}
+                    <a
+                      className="hover:text-emerald-500"
+                      href={userData.html_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {userData.html_url}
+                    </a>
                   </div>
-                  <div className="">
-                    <p className="inline ">
-                      <strong>Following : {userData.following}</strong>
-                    </p>
-                    <p className="pl-3 inline">
-                      <strong>Followers : {userData.followers}</strong>
-                    </p>
-                    <p>
-                      <strong>public repos : </strong>
-                      {userData.public_repos}
-                    </p>
-                    <p>
-                      <strong>Account Created : </strong>
-                      {userData.created_at}
-                    </p>
+                </div>
+                <div className="sm:justify-center m-5">
+                  <h2 className="text-xl font-medium block">
+                    <strong>{userData.name}</strong>
+                  </h2>
+                  <p className="text-blue-700">
+                  <FontAwesomeIcon icon="map-marker-alt" />
+                    {userData.location}
+                  </p>
+                  <p className="text-gray-700">{userData.bio}</p>
+                  <div className="mb-4">
+                    <div>
+                      {userData.twitter_username && (
+                        <a
+                          className=""
+                          href={userData.twitter_username}
+                          rel="noopener noreferrer"
+                        >
+                          Twitter :
+                        </a>
+                      )}
+                      {userData.email && <p>{userData.email}</p>}
+                    </div>
+                    <div className="">
+                      <p className="inline ">
+                        <strong>Following : {userData.following}</strong>
+                      </p>
+                      <p className="pl-3 inline">
+                        <strong>Followers : {userData.followers}</strong>
+                      </p>
+                      <p>
+                        <strong>public repos : </strong>
+                        {userData.public_repos}
+                      </p>
+                      <p>
+                        <strong>Account Created : </strong>
+                        {(new Date(userData.created_at)).toLocaleDateString()}
+                      {/* {userData.created_at}                 */}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

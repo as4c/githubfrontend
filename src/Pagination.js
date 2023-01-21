@@ -14,10 +14,10 @@ const Pagination = ({ userData }) => {
 
   return (
     <div className="">
-      <h1 className="text-center text-lg font-lg mb-3">
+      <h1 className="text-center text-lg text-gray-500 font-lg m-3">
         <strong>Repositories of {userData.login}</strong>
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentRepos.map((repo) => (
         <div className="bg-white rounded-lg p-6 shadow shadow-emerald-500">
             <h3>
@@ -40,8 +40,8 @@ const Pagination = ({ userData }) => {
               <p className="pl-2">{repo.open_issues} issues</p>
             </span>
             <span className="">
-              <p className="text-gray-700 ">Created at: {repo.created_at}</p>
-              <p className="text-gray-700">Last Pushed:{repo.pushed_at}</p>
+              <p className="text-gray-700 ">Created at:{(new Date(repo.created_at)).toLocaleDateString()} </p>
+              <p className="text-gray-700">Last Pushed:{(new Date(repo.pushed_at)).toLocaleDateString()}</p>
             </span>
             <div>
             {repo.language && (
@@ -53,6 +53,7 @@ const Pagination = ({ userData }) => {
           </div>
         ))}
       </div>
+      
       <div className="flex justify-center my-4">
             {currentPage !== 1 && (
             <button 
